@@ -52,7 +52,6 @@ objects:
           image: {TAGGED_IMAGE}
           imagePullPolicy: Always
           name: ${APP_NAME}
-          name: monkey-ops
           ports:
           - containerPort: 8080
             protocol: TCP
