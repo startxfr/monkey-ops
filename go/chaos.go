@@ -194,7 +194,7 @@ func scaleDC(dc string, chaosInput *ChaosInput, replicas float64) {
 
 	log.Printf(
 		"%s\t%s",
-		"scaled dc "+dc+" to: "+strconv.FormatFloat(replicas, 'f', -1, 64),
+		"scaled dc "+dc+" to "+strconv.FormatFloat(replicas, 'f', -1, 64),
 		time.Since(start),
 	)
 

@@ -1,1 +1,2 @@
-# Docker image Monkey-Ops
+![Monkey-Ops logo](resources\images\monkey-ops-logo.jpg)
+

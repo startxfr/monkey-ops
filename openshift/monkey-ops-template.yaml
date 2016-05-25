@@ -2,10 +2,10 @@ apiVersion: v1
 kind: Template
 metadata:
   annotations:
-    description: Template for nginx monitoring it needs an EPAgent
+    description: Template for monkey-ops Agent
     iconClass: icon-openjdk
     tags: instant-app,agent
-  name: nginxmonitor
+  name: monkey-ops
 objects:
 - apiVersion: v1
   kind: DeploymentConfig
@@ -32,12 +32,6 @@ objects:
           deploymentconfig: ${APP_NAME}
       spec:
         containers:
-        - args:
-          - /nginxmonitor
-          - -kubernetes_service=${NGINX_SERVICE_NAME}
-          - -introscope_metric_label=${INTROSCOPE_LABEL}
-          - -stats_uri=${NGINX_STATUS_URI}
-          - -epagent_xml_endpoint=${WILY_EPAGENT_SERVICE_IP}
           env:
           - name: APP_NAME
             value: ${APP_NAME}
@@ -45,6 +39,16 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
+          - name: REGION_URL
+            value: ${REGION_URL}
+          - name: TOKEN
+            value: ${TOKEN}
+          - name: INTERVAL
+            value: ${INTERVAL}
+          - name: TOTAL_TIME
+            value: ${TOTAL_TIME}
+          - name: MODE
+            value: ${MODE}                                             
           - name: TZ
             value: ${TZ}
           image: {TAGGED_IMAGE}
@@ -52,9 +56,9 @@ objects:
           name: ${APP_NAME}
           resources:
             limits:
-              memory: 6M
+              memory: 20M
             request:
-              memory: 6M
+              memory: 20M
           securityContext:
             capabilities: {}
             privileged: false
@@ -76,28 +80,44 @@ objects:
               name: annotations
           name: podinfo
   status: {}
+name: REGION_URL
+            value: ${REGION_URL}
+          - name: TOKEN
+            value: ${TOKEN}
+          - name: INTERVAL
+            value: ${INTERVAL}
+          - name: TOTAL_TIME
+            value: ${TOTAL_TIME}
+          - name: MODE
+            value: ${MODE}
 parameters:
 - description: Application name
   displayName: Application Name
   name: APP_NAME
   required: true
-- description: Wily EPAgent Service IP, the Service name is [SERVICE_NAME]-xml:8000, your project must have an EPAgent pod deployed
-  displayName: Wily EPAgent Service IP 
-  name: WILY_EPAGENT_SERVICE_IP
+  value: monkey-ops
+- description: URL of the region, e.g., https://api.boae.paas.gsnetcloud.corp:8443
+  displayName: URL of the region, e.g., https://api.boae.paas.gsnetcloud.corp:8443 
+  name: REGION_URL
   required: true
-- description: nginx status Service Name, tipically 81, for ej. nginx-status.globalpaas-dev.endpoints, this is the service that you want to monitor
-  displayName: nginx status Service Name, service name format must be [SERVICE]-status.[PROJECT_NAME].endpoints
-  name: NGINX_SERVICE_NAME
+- description: Openshift Bearer Token
+  displayName: Openshift Bearer Token
+  name: TOKEN
   required: true
-- description: Introscope metric's label, this label is used to group nginx metrics in a folder, we recommed to use the nginx service name
-  displayName: Introscope metric's label
-  name: INTROSCOPE_LABEL
+- description: Time interval between each actuation of operator monkey
+  displayName: Time interval between each actuation of operator monkey. It must be in seconds
+  name: INTERVAL
   required: true
-  value: nginx_CHANGE
-- description: nginx status URI, by default the URI is nginx_status
-  displayName: nginx status URI
-  name: NGINX_STATUS_URI
-  value: nginx_status
+  value: 30
+- description: Execution Mode, Background or API REST
+  displayName: Execution Mode, It must be: "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
+  name: MODE
+  required: true
+  value: background
+- description: With Execution Mode = rest, total time of execution of chaos monkey
+  displayName: With Execution Mode = rest, total time of execution of chaos monkey. It must be in seconds
+  name: TOTAL_TIME
+  value: 180
 - description: TimeZone for the running containers.
   displayName: TimeZone
   name: TZ
