@@ -98,13 +98,14 @@ parameters:
   displayName: Time interval between each actuation of operator monkey. It must be in seconds
   name: INTERVAL
   required: true
-- description: Execution Mode, It must be: "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
-  displayName: Execution Mode, It must be: "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
+  value: 30
+- description: Execution Mode, It must be "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
+  displayName: Execution Mode, It must be "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
   name: MODE
   required: true
   value: background
-- description: With Execution Mode = rest, total time of execution of chaos monkey
-  displayName: With Execution Mode = rest, total time of execution of chaos monkey. It must be in seconds
+- description: With Execution Mode rest, total time of execution of chaos monkey
+  displayName: With Execution Mode rest, total time of execution of chaos monkey. It must be in seconds
   name: TOTAL_TIME
 - description: TimeZone for the running containers.
   displayName: TimeZone
