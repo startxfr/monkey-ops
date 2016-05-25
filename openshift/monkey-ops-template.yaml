@@ -32,7 +32,7 @@ objects:
           deploymentconfig: ${APP_NAME}
       spec:
         containers:
-          env:
+        - env:
           - name: APP_NAME
             value: ${APP_NAME}
           - name: PROJECT_NAME
@@ -54,6 +54,10 @@ objects:
           image: {TAGGED_IMAGE}
           imagePullPolicy: Always
           name: ${APP_NAME}
+          name: wordpress
+          ports:
+          - containerPort: 8080
+            protocol: TCP
           resources:
             limits:
               memory: 20M
