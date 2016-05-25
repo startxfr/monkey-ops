@@ -80,16 +80,6 @@ objects:
               name: annotations
           name: podinfo
   status: {}
-name: REGION_URL
-            value: ${REGION_URL}
-          - name: TOKEN
-            value: ${TOKEN}
-          - name: INTERVAL
-            value: ${INTERVAL}
-          - name: TOTAL_TIME
-            value: ${TOTAL_TIME}
-          - name: MODE
-            value: ${MODE}
 parameters:
 - description: Application name
   displayName: Application Name
