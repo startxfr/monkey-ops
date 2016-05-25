@@ -1,2 +1,2 @@
-![Monkey-Ops logo](resources\images\monkey-ops-logo.jpg)
+![Monkey-Ops logo](resources/images/monkey-ops-logo.jpg)
 
