@@ -98,7 +98,7 @@ parameters:
   displayName: Time interval between each actuation of operator monkey. It must be in seconds
   name: INTERVAL
   required: true
-- description: Execution Mode, Background or API REST
+- description: Execution Mode, It must be: "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
   displayName: Execution Mode, It must be: "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
   name: MODE
   required: true
