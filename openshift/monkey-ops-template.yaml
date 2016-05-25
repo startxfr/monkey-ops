@@ -52,6 +52,8 @@ objects:
           - name: TZ
             value: ${TZ}
           image: {TAGGED_IMAGE}
+          serviceAccount: monkey-ops
+          serviceAccountName: monkey-ops
           imagePullPolicy: Always
           name: ${APP_NAME}
           name: wordpress
