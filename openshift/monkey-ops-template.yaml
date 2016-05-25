@@ -50,11 +50,9 @@ objects:
           - name: TZ
             value: ${TZ}
           image: {TAGGED_IMAGE}
-          serviceAccount: monkey-ops
-          serviceAccountName: monkey-ops
           imagePullPolicy: Always
           name: ${APP_NAME}
-          name: wordpress
+          name: monkey-ops
           ports:
           - containerPort: 8080
             protocol: TCP
@@ -73,6 +71,8 @@ objects:
             readOnly: false
         dnsPolicy: ClusterFirst
         restartPolicy: Always
+        serviceAccount: monkey-ops
+        serviceAccountName: monkey-ops
         volumes:
         - metadata:
             items:
