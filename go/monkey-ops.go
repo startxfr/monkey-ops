@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"io/ioutil"
+	"fmt"
 	
 	"github.com/spf13/viper"
 	flag "github.com/spf13/pflag"
@@ -47,6 +48,7 @@ func main() {
     }
 
     token := string(tokenBytes[:])
+    fmt.Println(token);
 	
 	chaosInput:= ChaosInput{
 		Url: regionUrl,
