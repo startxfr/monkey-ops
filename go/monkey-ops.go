@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-	"fmt"
 	
 	"github.com/spf13/viper"
 	flag "github.com/spf13/pflag"
@@ -43,8 +42,6 @@ func main() {
 	interval := viper.GetFloat64("INTERVAL")
 	totalTime := viper.GetFloat64("TOTAL_TIME")
 	mode := viper.GetString("MODE")
-
-	fmt.Println(totalTime)
 	
 	chaosInput:= ChaosInput{
 		Url: regionUrl,
