@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+//Get all the pods running from a project
 func GetPods(token string, project string, url string) []string {
 
 	urlGetPods := url + "/api/v1/namespaces/" + project + "/pods"
@@ -67,6 +68,7 @@ func GetPods(token string, project string, url string) []string {
 	return podsName
 }
 
+//Delete a running pod
 func DeletePod(pod string, chaosInput *ChaosInput) {
 	start := time.Now()
 
@@ -99,6 +101,7 @@ func DeletePod(pod string, chaosInput *ChaosInput) {
 
 }
 
+//Get all the DeploymentConfig from a project
 func GetDCs(chaosInput *ChaosInput) []DcObject {
 
 	urlGetDCs := chaosInput.Url + "/oapi/v1/namespaces/" + chaosInput.Project + "/deploymentconfigs"
@@ -150,6 +153,7 @@ func GetDCs(chaosInput *ChaosInput) []DcObject {
 	return dcsName
 }
 
+//Scale down a DC if the number of replicas > o or scale up a DC if number of replicas = 0
 func scaleDC(dc string, chaosInput *ChaosInput, replicas float64) {
 
 	start := time.Now()
@@ -200,6 +204,7 @@ func scaleDC(dc string, chaosInput *ChaosInput, replicas float64) {
 
 }
 
+//method to launch the chaos
 func ExecuteChaos(chaosInput *ChaosInput, mode string) {
 
 	start := time.Now()
@@ -207,6 +212,7 @@ func ExecuteChaos(chaosInput *ChaosInput, mode string) {
 
 	for doChaos := (mode == "background" || (time.Since(start).Seconds() < chaosInput.TotalTime)); doChaos; doChaos = (mode == "background" || (time.Since(start).Seconds() < chaosInput.TotalTime)) {
 		
+		//Randomly choice if delete pod or scale a DC
 		randComponent := random(1, 3)
 
 		switch randComponent {
@@ -230,6 +236,7 @@ func ExecuteChaos(chaosInput *ChaosInput, mode string) {
 			}
 		}
 
+		//Waiting for the next monkey action
 		time.Sleep(time.Second * time.Duration(chaosInput.Interval))
 	}
 

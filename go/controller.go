@@ -41,7 +41,7 @@ func OcLogin(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//Rest json (POST) to generate chaos in a devops project
+//Rest json (POST) to launch chaos in a devops project
 func DoChaos(w http.ResponseWriter, r *http.Request) {
 
 	var chaosInput ChaosInput
