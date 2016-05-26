@@ -39,8 +39,6 @@ objects:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.namespace
-          - name: REGION_URL
-            value: ${REGION_URL}
           - name: INTERVAL
             value: ${INTERVAL}
           - name: TOTAL_TIME
@@ -89,10 +87,6 @@ parameters:
   name: APP_NAME
   required: true
   value: monkey-ops
-- description: URL of the region, e.g., https://api.boae.paas.gsnetcloud.corp:8443
-  displayName: URL of the region, e.g., https://api.boae.paas.gsnetcloud.corp:8443 
-  name: REGION_URL
-  required: true
 - description: Time interval between each actuation of operator monkey
   displayName: Time interval between each actuation of operator monkey. It must be in seconds
   name: INTERVAL

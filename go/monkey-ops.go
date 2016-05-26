@@ -12,9 +12,9 @@ import (
 
 func main() {
 	
-	flag.String("REGION_URL", "https://api.boae.paas.gsnetcloud.corp:8443", "Region URL")
-	flag.String("PROJECT_NAME", "devstack-dev", "Project to get crazy")
-	flag.Float64("INTERVAL", 20, "interval time in seconds")
+	flag.String("REGION_URL", "", "Region URL")
+	flag.String("PROJECT_NAME", "", "Project to get crazy")
+	flag.Float64("INTERVAL", 30, "interval time in seconds")
 	flag.Float64("TOTAL_TIME", 0, "total time of chaos monkey in seconds")
 	flag.String("MODE", "background", "Execution mode: background or rest")
 	
@@ -26,6 +26,8 @@ func main() {
 	viper.BindPFlag( "TOTAL_TIME", flag.Lookup("TOTAL_TIME") )
 	viper.BindPFlag( "MODE", flag.Lookup("MODE") )
 	
+	viper.BindEnv("KUBERNETES_SERVICE_HOST")
+	viper.BindEnv("KUBERNETES_SERVICE_PORT")
 	viper.BindEnv("REGION_URL")
 	viper.BindEnv("PROJECT_NAME")
 	viper.BindEnv("INTERVAL")
@@ -35,7 +37,12 @@ func main() {
 	flag.Parse()
 	
 	//set configuration
-	regionUrl := viper.GetString("REGION_URL")
+	var regionUrl string
+	if (viper.GetString("KUBERNETES_SERVICE_HOST") != "" && viper.GetString("KUBERNETES_SERVICE_PORT") != "") {
+		regionUrl = "https://" + viper.GetString("KUBERNETES_SERVICE_HOST") + ":" + viper.GetString("KUBERNETES_SERVICE_PORT")
+	} else {
+		regionUrl = viper.GetString("REGION_URL")
+	}	
 	project := viper.GetString("PROJECT_NAME")
 	interval := viper.GetFloat64("INTERVAL")
 	totalTime := viper.GetFloat64("TOTAL_TIME")
@@ -48,7 +55,7 @@ func main() {
     }
 
     token := string(tokenBytes[:])
-    fmt.Println(token);
+    fmt.Println(regionUrl);
 	
 	chaosInput:= ChaosInput{
 		Url: regionUrl,
