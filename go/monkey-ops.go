@@ -15,7 +15,6 @@ func main() {
 	flag.String("PROJECT_NAME", "", "Project to get crazy")
 	flag.String("TOKEN", "", "Bearer token with edit grants to access to the Openshift project")
 	flag.Float64("INTERVAL", 30, "interval time in seconds")
-	flag.Float64("TOTAL_TIME", 0, "total time of chaos monkey in seconds")
 	flag.String("MODE", "background", "Execution mode: background or rest")
 
 	//Binding flags and env vars
@@ -23,7 +22,6 @@ func main() {
 	viper.BindPFlag("PROJECT_NAME", flag.Lookup("PROJECT_NAME"))
 	viper.BindPFlag("TOKEN", flag.Lookup("TOKEN"))
 	viper.BindPFlag("INTERVAL", flag.Lookup("INTERVAL"))
-	viper.BindPFlag("TOTAL_TIME", flag.Lookup("TOTAL_TIME"))
 	viper.BindPFlag("MODE", flag.Lookup("MODE"))
 
 	viper.BindEnv("KUBERNETES_SERVICE_HOST")
@@ -32,7 +30,6 @@ func main() {
 	viper.BindEnv("PROJECT_NAME")
 	viper.BindEnv("TOKEN")
 	viper.BindEnv("INTERVAL")
-	viper.BindEnv("TOTAL_TIME")
 	viper.BindEnv("MODE")
 
 	flag.Parse()
@@ -47,7 +44,6 @@ func main() {
 	project := viper.GetString("PROJECT_NAME")
 	token := viper.GetString("TOKEN")
 	interval := viper.GetFloat64("INTERVAL")
-	totalTime := viper.GetFloat64("TOTAL_TIME")
 	mode := viper.GetString("MODE")
 
 	if mode == "background" {
@@ -69,7 +65,7 @@ func main() {
 			Project:   project,
 			Token:     token,
 			Interval:  interval,
-			TotalTime: totalTime,
+			TotalTime: 0,
 		}
 		
 		//Launh the chaos

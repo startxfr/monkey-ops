@@ -41,8 +41,6 @@ objects:
                 fieldPath: metadata.namespace
           - name: INTERVAL
             value: ${INTERVAL}
-          - name: TOTAL_TIME
-            value: ${TOTAL_TIME}
           - name: MODE
             value: ${MODE}                                             
           - name: TZ
@@ -96,9 +94,6 @@ parameters:
   name: MODE
   required: true
   value: background
-- description: With Execution Mode rest, total time of execution of chaos monkey
-  displayName: With Execution Mode rest, total time of execution of chaos monkey. It must be in seconds
-  name: TOTAL_TIME
 - description: TimeZone for the running containers.
   displayName: TimeZone
   name: TZ
