@@ -52,7 +52,7 @@ The service accept parameters as flags or environment variables. These are the i
 	
 Once you have monkey-ops running in your project, you can see what the service is doing in youy application logs. i.e.
 
-![Monkey-Ops logs](resources/images/logs.jpg)
+![Monkey-Ops logs](resources/images/logs.JPG)
 
 **Time Zone**
 
