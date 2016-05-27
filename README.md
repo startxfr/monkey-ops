@@ -62,37 +62,46 @@ By default this image uses the time zone "Europe/Madrid", if you want to change 
 
 Monkey-Ops Api Rest expose two endpoints:
 
-* ** /login **
+* **/login**
 
-	This endpoint allows a user to log into Openshift in order to get a token and  projects to which it belongs.
-	**Request Input JSON:**
-	{
-     "user": "User name",
-     "password": "User password",
-     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443"
-	}
-	**Request Output JSON:**
-	{
-     "token": "Token",
-     "projects": {
-    	 "project1 name",
-    	 "project2 name",
-    	 .
-    	 .
-    	 .
-    	 "projectN name"
-    	 }
-	 }
+>This endpoint allows a user to log into Openshift in order to get a token and  projects to which it belongs.
+
 	
-* ** /chaos **
+>**Request Input JSON:**
 
-	This endpoint allows a user to launch the monkey-ops agent for a certain time..
-	**Request Input JSON:**
-	{
-     "token": "Token",
-     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443",
-     "project": "Project name",
-     "interval": Time interval between each actuation in seconds,
-     "totalTime": Total Time of monkey-ops execution in seconds
-	}
+
+>{
+>     "user": "User name",
+>     "password": "User password",
+>     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443"
+> }
+
+>**Request Output JSON:**
+
+>	{
+>     "token": "Token",
+>     "projects": {
+>    	 "project1 name",
+>    	 "project2 name",
+>    	 .
+>    	 .
+>    	 .
+>    	 "projectN name"
+>    	 }
+>}	 
+
+	
+* **/chaos**
+
+>This endpoint allows a user to launch the monkey-ops agent for a certain time.
+
+>**Request Input JSON:**
+
+>	{
+>     "token": "Token",
+>     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443",
+>     "project": "Project name",
+>     "interval": Time interval between each actuation in seconds,
+>     "totalTime": Total Time of monkey-ops execution in seconds
+>	}
 
