@@ -128,7 +128,7 @@ func GetDCs(chaosInput *ChaosInput) []DcObject {
 
 	if err != nil {
 		log.Println("API_SERVER=" + chaosInput.Url)
-		log.Fatal("Fail getting DepolymentConfigs")
+		log.Fatal("Fail getting DeploymentConfigs")
 	}
 
 	defer resp.Body.Close()
@@ -195,7 +195,7 @@ func scaleDC(dc string, chaosInput *ChaosInput, replicas float64) {
 
 	if err != nil {
 		log.Println("API_SERVER=" + chaosInput.Url)
-		log.Fatal("Fail deleting DepolymentConfig")
+		log.Fatal("Fail deleting DeploymentConfig")
 	}
 
 	defer resp.Body.Close()
