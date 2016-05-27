@@ -34,11 +34,11 @@ The service accept parameters as flags or environment variables. These are the i
 
 **Downloading the image**
 
-	docker pull produban/monkey-ops:latest
+	$ docker pull produban/monkey-ops:latest
 
 **Running the image**
 
-	docker run produban/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
+	$ docker run produban/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
 
 ### Usage with Openshift V3.x
 
@@ -46,13 +46,31 @@ Before all is necessary to create a service account (and a token as a secret) wi
 
 In this page you can find how to do it: [Managing Service Accounts link](https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html#managing-service-accounts)
 
+Simply you have to create a service account called monkey-ops:
+
+	$ more monkey-ops.json
+	{
+	  "apiVersion": "v1",
+	  "kind": "ServiceAccount",
+	  "metadata": {
+	    "name": "monkey-ops"
+	  }
+	}
+	
+	$ oc create -f monkey-ops.json
+	serviceaccounts/monkey-ops
+	
+And later, grant it with edit role:
+
+	$ oc policy add-role-to-user edit system:serviceaccount:"project name":monkey-ops
+
 **Deploy *monkey-ops-template.yaml* into your Openshift Project:**
 
-	oc create -f ./openshift/monkey-ops-template.yaml -n "Openshift Project name"
+	$ oc create -f ./openshift/monkey-ops-template.yaml -n "Openshift Project name"
 	
 **Create new  application monkey-ops into your Openshift Project:**
 	
-	oc new-app --name=monkey-ops --template=monkey-ops --param=APP_NAME=monkey-ops,INTERVAL=30,MODE=background,TZ=Europe/Madrid --labels=app_name=monkey-ops -n <project_name>
+	$ oc new-app --name=monkey-ops --template=monkey-ops --param=APP_NAME=monkey-ops,INTERVAL=30,MODE=background,TZ=Europe/Madrid --labels=app_name=monkey-ops -n <project_name>
 	
 Once you have monkey-ops running in your project, you can see what the service is doing in youy application logs. i.e.
 
