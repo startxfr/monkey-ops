@@ -29,5 +29,70 @@ The service accept parameters as flags or environment variables. These are the i
       --MODE string           Execution mode: background or rest (by default "background")
       --PROJECT_NAME string   Project to get crazy
       --TOKEN string          Bearer token with edit grants to access to the Openshift project
+      
+### Usage with Docker
 
+**Downloading the image**
+
+	docker pull registry.lvtc.gsnet.corp/produban/monkey-ops:latest
+
+**Running the image**
+
+	docker run registry.lvtc.gsnet.corp/produban/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
+
+### Usage with Openshift V3.x
+
+**Deploy *monkey-ops-template.yaml* into your Openshift Project:**
+
+	oc create -f ./openshift/monkey-ops-template.yaml -n "Openshift Project name"
+	
+**Create new  application monkey-ops into your Openshift Project:**
+	
+	oc new-app --name=monkey-ops --template=monkey-ops --param=APP_NAME=monkey-ops,INTERVAL=30,MODE=background,TZ=Europe/Madrid --labels=app_name=monkey-ops -n <project_name>
+	
+Once you have monkey-ops running in your project, you can see what the service is doing in youy application logs. i.e.
+
+![Monkey-Ops logs](resources/images/logs.jpg)
+
+**Time Zone**
+
+By default this image uses the time zone "Europe/Madrid", if you want to change the default time zone, you should specify the environment variable TZ.
+
+### API REST
+
+Monkey-Ops Api Rest expose two endpoints:
+
+* ** /login **
+
+	This endpoint allows a user to log into Openshift in order to get a token and  projects to which it belongs.
+	**Request Input JSON:**
+	{
+     "user": "User name",
+     "password": "User password",
+     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443"
+	}
+	**Request Output JSON:**
+	{
+     "token": "Token",
+     "projects": {
+    	 "project1 name",
+    	 "project2 name",
+    	 .
+    	 .
+    	 .
+    	 "projectN name"
+    	 }
+	 }
+	
+* ** /chaos **
+
+	This endpoint allows a user to launch the monkey-ops agent for a certain time..
+	**Request Input JSON:**
+	{
+     "token": "Token",
+     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443",
+     "project": "Project name",
+     "interval": Time interval between each actuation in seconds,
+     "totalTime": Total Time of monkey-ops execution in seconds
+	}
 
