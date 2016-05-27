@@ -42,6 +42,8 @@ The service accept parameters as flags or environment variables. These are the i
 
 ### Usage with Openshift V3.x
 
+Before all is necessary to create a service account (and a token as a secret) with editing permissions within the project that you want to use. In this page tou can find how to do it: [Managing Service Accounts link](https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html#managing-service-accounts)
+
 **Deploy *monkey-ops-template.yaml* into your Openshift Project:**
 
 	oc create -f ./openshift/monkey-ops-template.yaml -n "Openshift Project name"
