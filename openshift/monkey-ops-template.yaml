@@ -45,7 +45,7 @@ objects:
             value: ${MODE}                                             
           - name: TZ
             value: ${TZ}
-          image: {TAGGED_IMAGE}
+          image: produban/monkey-ops:1.0.0.RELEASE
           imagePullPolicy: Always
           name: ${APP_NAME}
           ports:
