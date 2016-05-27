@@ -34,11 +34,11 @@ The service accept parameters as flags or environment variables. These are the i
 
 **Downloading the image**
 
-	docker pull registry.lvtc.gsnet.corp/produban/monkey-ops:latest
+	docker pull produban/monkey-ops:latest
 
 **Running the image**
 
-	docker run registry.lvtc.gsnet.corp/produban/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
+	docker run produban/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
 
 ### Usage with Openshift V3.x
 
