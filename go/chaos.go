@@ -36,7 +36,8 @@ func GetPods(token string, project string, url string) []string {
 	resp, err := cli.Do(req)
 
 	if err != nil {
-		panic(err)
+		log.Println("API_SERVER=" + url)
+		log.Fatal("Fail getting Pods")
 	}
 
 	defer resp.Body.Close()
@@ -88,7 +89,8 @@ func DeletePod(pod string, chaosInput *ChaosInput) {
 	resp, err := cli.Do(req)
 
 	if err != nil {
-		panic(err)
+		log.Println("API_SERVER=" + chaosInput.Url)
+		log.Fatal("Fail deleting Pod")
 	}
 
 	defer resp.Body.Close()
@@ -125,7 +127,8 @@ func GetDCs(chaosInput *ChaosInput) []DcObject {
 	resp, err := cli.Do(req)
 
 	if err != nil {
-		panic(err)
+		log.Println("API_SERVER=" + chaosInput.Url)
+		log.Fatal("Fail getting DepolymentConfigs")
 	}
 
 	defer resp.Body.Close()
@@ -191,7 +194,8 @@ func scaleDC(dc string, chaosInput *ChaosInput, replicas float64) {
 	resp, err := cli.Do(req)
 
 	if err != nil {
-		panic(err)
+		log.Println("API_SERVER=" + chaosInput.Url)
+		log.Fatal("Fail deleting DepolymentConfig")
 	}
 
 	defer resp.Body.Close()
