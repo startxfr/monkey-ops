@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+	"os"
 )
 
 //Get all the pods running from a project
@@ -235,6 +236,15 @@ func ExecuteChaos(chaosInput *ChaosInput, mode string) {
 					replicas--
 				} else {
 					replicas++
+				}
+				//To avoid Monkey-ops atack itself
+				if dcs[randDc].Name ==  os.Getenv("APP_NAME"){
+					log.Println("Prevent Monkey-Ops from attacking itself")
+					if randDc == 0 {
+						randDc ++
+					} else {
+						randDc --
+					}
 				}
 				scaleDC(dcs[randDc].Name, chaosInput, replicas)
 			}
