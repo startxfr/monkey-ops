@@ -46,7 +46,7 @@ objects:
           - name: TZ
             value: ${TZ}
           image: produban/monkey-ops:1.0.0.RELEASE
-          imagePullPolicy: Always
+          imagePullPolicy: IfNotPresent
           name: ${APP_NAME}
           ports:
           - containerPort: 8080
