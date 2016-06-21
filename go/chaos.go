@@ -84,7 +84,7 @@ func DeletePod(pod string, chaosInput *ChaosInput) {
 
 	urlDeletePod := chaosInput.Url + "/api/v1/namespaces/" + chaosInput.Project + "/pods/" + pod
 
-	// Set up the HTTP request to get pods
+	// Set up the HTTP request to delete pod
 	req, err := http.NewRequest("DELETE", urlDeletePod, nil)
 	req.Header.Add("Authorization", "Bearer "+chaosInput.Token)
 	resp, err := cli.Do(req)
@@ -109,7 +109,7 @@ func GetDCs(chaosInput *ChaosInput) []DcObject {
 
 	urlGetDCs := chaosInput.Url + "/oapi/v1/namespaces/" + chaosInput.Project + "/deploymentconfigs"
 
-	// Set up the HTTP request to get pods
+	// Set up the HTTP request to get DCs
 	req, err := http.NewRequest("GET", urlGetDCs, nil)
 	req.Header.Add("Authorization", "Bearer "+chaosInput.Token)
 

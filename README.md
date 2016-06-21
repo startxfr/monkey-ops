@@ -42,7 +42,7 @@ The service accept parameters as flags or environment variables. These are the i
 
 ### Usage with Openshift V3.x
 
-Before all is necessary to create a service account (and a token as a secret) with editing permissions within the project that you want to use. The service account must be called **monkey-ops**.
+Before all is necessary to create a service account (and a token as a secret) with editing permissions within the project that you want to use. The service account must be called with the same name than monkey-ops-template.yml parameter SA_NAME, by default monkey-ops.
 
 In this page you can find how to do it: [Managing Service Accounts link](https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html#managing-service-accounts)
 

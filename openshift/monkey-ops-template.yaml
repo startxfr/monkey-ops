@@ -66,8 +66,8 @@ objects:
             readOnly: false
         dnsPolicy: ClusterFirst
         restartPolicy: Always
-        serviceAccount: monkey-ops
-        serviceAccountName: monkey-ops
+        serviceAccount: ${SA_NAME}
+        serviceAccountName: ${SA_NAME}
         volumes:
         - metadata:
             items:
@@ -83,6 +83,11 @@ parameters:
 - description: Application name
   displayName: Application Name
   name: APP_NAME
+  required: true
+  value: monkey-ops
+- description: Service Account name
+  displayName: Service Account name
+  name: SA_NAME
   required: true
   value: monkey-ops
 - description: Time interval between each actuation of operator monkey
