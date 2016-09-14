@@ -4,7 +4,7 @@
 
 ## What is Monkey-Ops
 
-Monkey-Ops is a simple service implemented in Go which is introduced into a OpenShift V3.X and generates some chaos within it. Monkey-Ops seeks some Openshift components like Pods or DeploymentConfigs and randomly terminates them.
+Monkey-Ops is a simple service implemented in Go which is deployed into a OpenShift V3.X and generates some chaos within it. Monkey-Ops seeks some Openshift components like Pods or DeploymentConfigs and randomly terminates them.
 
 
 ## Why Monkey-Ops
@@ -95,7 +95,7 @@ Monkey-Ops Api Rest expose two endpoints:
 >{
 >     "user": "User name",
 >     "password": "User password",
->     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443"
+>     "url": "Openshift API Server URL. e.g. https://ose.api.server:8443"
 > }
 
 >**Request Output JSON:**
@@ -121,7 +121,7 @@ Monkey-Ops Api Rest expose two endpoints:
 
 >	{
 >     "token": "Token",
->     "url": "Openshift API Server URL. e.g. https://api.boae.paas.gsnetcloud.corp:8443",
+>     "url": "Openshift API Server URL. e.g. https://ose.api.server:8443",
 >     "project": "Project name",
 >     "interval": Time interval between each actuation in seconds,
 >     "totalTime": Total Time of monkey-ops execution in seconds
