@@ -17,7 +17,6 @@ language: go
 before_install:
 - 'echo "{ \"experimental\": true, \"storage-driver\": \"overlay2\", \"max-concurrent-downloads\":50,\"max-concurrent-uploads\": 50 }" | sudo tee /etc/docker/daemon.json'
 - sudo service docker restart
-- docker pull scratch
 - docker images
 - mkdir ~/.gocache
 - export GOPATH=~/.gocache
