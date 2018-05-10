@@ -29,7 +29,7 @@ before_install:
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; elif [ "$TRAVIS_BRANCH"  == "test" ]; then echo "testing"; else echo $TRAVIS_BRANCH ; fi`
 
 script:
-  cd ./image
+- cd ./image
 - docker build --squash -t $REPO:$TAG .
 - docker run -d --name monkey-test $REPO:$TAG --TOKEN=token
 
