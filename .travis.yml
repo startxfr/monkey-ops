@@ -14,12 +14,12 @@ before_install:
   50 }" | sudo tee /etc/docker/daemon.json'
 - sudo service docker restart
 - docker images
-- mkdir ~/.gocache
-- export GOPATH=~/.gocache
-- go get -v -u github.com/spf13/viper
-- go get -v -u github.com/spf13/pflag
-- go get -v -u github.com/gorilla/mux
-- go build -a -installsuffix cgo -o ./image/monkey-ops ./go/*.go
+#- mkdir ~/.gocache
+#- export GOPATH=~/.gocache
+#- go get -v -u github.com/spf13/viper
+#- go get -v -u github.com/spf13/pflag
+#- go get -v -u github.com/gorilla/mux
+#- go build -a -installsuffix cgo -o ./image/monkey-ops ./go/*.go
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; elif [ "$TRAVIS_BRANCH"  ==
   "test" ]; then echo "testing"; else echo $TRAVIS_BRANCH ; fi`
