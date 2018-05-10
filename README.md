@@ -22,11 +22,18 @@ Monkey-Ops has two different modes of execution: background or rest.
 * **Background**: With the Background mode, the service is running nonstop until you stop the container.
 * **Rest**: With the Rest mode, you consume an api rest that allows you login in Openshift, choose a project, and execute the chaos for a certain time.
 
+Monkey-Ops has tree differents chaos method: pod, dc or random.
+
+* **pod**: This method tell the agent to use only pod deletion for perturbing the service or application
+* **dc**: This method tell the agent to use only deployementConfig change (reducing replica number) for perturbing the service or application
+* **random**: This method tell the agent to use randomly alternate between theses two method for perturbing the project components
+
 The service accept parameters as flags or environment variables. These are the input flags required:
 
       --API_SERVER string     API Server URL
       --INTERVAL float        Time interval between each actuation of operator monkey. It must be in seconds (by default 30)
       --MODE string           Execution mode: background or rest (by default "background")
+      --METHOD string         Chaos method: pod, dc or random (default "random")
       --PROJECT_NAME string   Project to get crazy
       --TOKEN string          Bearer token with edit grants to access to the Openshift project
       
@@ -34,11 +41,11 @@ The service accept parameters as flags or environment variables. These are the i
 
 **Downloading the image**
 
-	$ docker pull produban/monkey-ops:latest
+	$ docker pull startxfr/monkey-ops:latest
 
 **Running the image**
 
-	$ docker run produban/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
+	$ docker run startxfr/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
 
 ### Usage with Openshift V3.x
 
@@ -66,19 +73,29 @@ And later, grant it with edit role:
 
 **Deploy *monkey-ops-template.yaml* into your Openshift Project:**
 
-	$ oc create -f ./openshift/monkey-ops-template.yaml -n "Openshift Project name"
-	
+```bash
+oc create \
+   -f https://raw.githubusercontent.com/startxfr/monkey-ops/master/openshift/monkey-ops-template.yaml \
+   -n "Openshift Project name"
+```
+
 **Create new  application monkey-ops into your Openshift Project:**
 	
-	$ oc new-app --name=monkey-ops --template=monkey-ops --param=APP_NAME=monkey-ops,INTERVAL=30,MODE=background,TZ=Europe/Madrid --labels=app_name=monkey-ops -n <project_name>
+```bash
+oc new-app \
+   --name=monkey-ops \
+   --template=monkey-ops \
+   --param=APP_NAME=monkey-ops,INTERVAL=30,MODE=background,TZ=Europe/Paris \
+   --labels=app_name=monkey-ops \
+   -n <project_name>
 	
-Once you have monkey-ops running in your project, you can see what the service is doing in youy application logs. i.e.
+Once you have monkey-ops running in your project, you can see what the service is doing in your application logs. i.e.
 
 ![Monkey-Ops logs](resources/images/logs.JPG)
 
 **Time Zone**
 
-By default this image uses the time zone "Europe/Madrid", if you want to change the default time zone, you should specify the environment variable TZ.
+By default this image uses the time zone "Europe/Paris", if you want to change the default time zone, you should specify the environment variable TZ.
 
 ### API REST
 

@@ -1,11 +1,18 @@
 apiVersion: v1
 kind: Template
 metadata:
+  name: monkey-ops-template
   annotations:
-    description: Template for monkey-ops Agent
+    openshift.io/display-name: Chaos Monkey
+    description: Template for deploying a chaos monkey Agent in your project
     iconClass: icon-openjdk
-    tags: instant-app,agent
-  name: monkey-ops
+    tags: startx,test,chaos,monkey
+    openshift.io/provider-display-name: STARTX
+    openshift.io/documentation-url: https://github.com/startxfr/monkey-ops/blob/master/README.md
+    openshift.io/support-url: https://github.com/startxfr/monkey-ops/issues/new
+message: Your chaos monkey is deploying in your project. You can use openshift console to observe deployment and your application reaction
+labels:
+  template: monkey-ops-template
 objects:
 - apiVersion: v1
   kind: DeploymentConfig
@@ -45,7 +52,7 @@ objects:
             value: ${MODE}                                             
           - name: TZ
             value: ${TZ}
-          image: produban/monkey-ops:1.0.0.RELEASE
+          image: startxfr/monkey-ops:latest
           imagePullPolicy: IfNotPresent
           name: ${APP_NAME}
           ports:
@@ -80,26 +87,32 @@ objects:
           name: podinfo
   status: {}
 parameters:
-- description: Application name
-  displayName: Application Name
+- displayName: Application Name
+  description: Nae of this application
   name: APP_NAME
   required: true
   value: monkey-ops
-- description: Service Account name
-  displayName: Service Account name
+- displayName: Service Account name
+  description: Service Account name to use for k8s API access
   name: SA_NAME
   required: true
   value: monkey-ops
-- description: Time interval between each actuation of operator monkey
-  displayName: Time interval between each actuation of operator monkey. It must be in seconds
+- displayName: Time interval between each action
+  description: Time interval between each actuation of operator monkey. It must be in seconds
   name: INTERVAL
+  value: 30
   required: true
-- description: Execution Mode, It must be "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
-  displayName: Execution Mode, It must be "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
+- displayName: Execution Mode
+  description: Execution Mode, It must be "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.
   name: MODE
   required: true
   value: background
-- description: TimeZone for the running containers.
-  displayName: TimeZone
+- displayName: Chaos Method
+  description: Method to use for this chaos. It must be "pod" for pod deletion, "dc" for DeploymentConfig change (reduce replica number), or "random" to alternate between the 2 previous methods
+  name: METHOD
+  value: pod
+  required: true
+- displayName: TimeZone
+  description: TimeZone for the running containers.
   name: TZ
-  value: Europe/Madrid
+  value: Europe/Paris
