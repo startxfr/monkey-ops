@@ -14,6 +14,6 @@ if [ $? = 0 ]
 then
     cd ./image
     echo "+-- Building docker image"
-	docker build ${PROXY} -t startxfr/monkey-ops:${TAG} .
+	docker build ${PROXY} -t startx/monkey-ops:${TAG} .
     cd -
 fi

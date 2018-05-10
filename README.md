@@ -41,11 +41,11 @@ The service accept parameters as flags or environment variables. These are the i
 
 **Downloading the image**
 
-	$ docker pull startxfr/monkey-ops:latest
+	$ docker pull startx/monkey-ops:latest
 
 **Running the image**
 
-	$ docker run startxfr/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
+	$ docker run startx/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
 
 ### Usage with Openshift V3.x
 

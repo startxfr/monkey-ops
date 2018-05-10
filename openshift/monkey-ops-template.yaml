@@ -52,7 +52,7 @@ objects:
             value: ${MODE}                                             
           - name: TZ
             value: ${TZ}
-          image: startxfr/monkey-ops:latest
+          image: startx/monkey-ops:latest
           imagePullPolicy: IfNotPresent
           name: ${APP_NAME}
           ports:
