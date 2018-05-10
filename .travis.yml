@@ -26,6 +26,6 @@ before_install:
 script:
 - cd ./image
 - docker build --squash -t $REPO:$TAG .
-- docker run -d --name monkey-test $REPO:$TAG --TOKEN=token
+- docker run -d --name monkey-test $REPO:$TAG /monkey-ops --TOKEN=token
 after_success:
 - docker push $REPO:$TAG
