@@ -219,6 +219,15 @@ func ExecuteChaos(chaosInput *ChaosInput, mode string) {
 		
 		//Randomly choice if delete pod or scale a DC
 		randComponent := random(1, 3)
+		//Use selected method if given
+        if (chaosInput.Method != "" && chaosInput.Method != "random")  {
+          switch chaosInput.Method {
+          case "pod":
+              randComponent = 1
+          case "dc":
+              randComponent = 2
+          }
+        }
 
 		switch randComponent {
 		case 1:

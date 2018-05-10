@@ -16,6 +16,7 @@ func main() {
 	flag.String("TOKEN", "", "Bearer token with edit grants to access to the Openshift project")
 	flag.Float64("INTERVAL", 30, "interval time in seconds")
 	flag.String("MODE", "background", "Execution mode: background or rest")
+	flag.String("METHOD", "random", "Chaos method: pod, dc or random")
 
 	//Binding flags and env vars
 	viper.BindPFlag("API_SERVER", flag.Lookup("API_SERVER"))
@@ -23,6 +24,7 @@ func main() {
 	viper.BindPFlag("TOKEN", flag.Lookup("TOKEN"))
 	viper.BindPFlag("INTERVAL", flag.Lookup("INTERVAL"))
 	viper.BindPFlag("MODE", flag.Lookup("MODE"))
+	viper.BindPFlag("METHOD", flag.Lookup("METHOD"))
 
 	viper.BindEnv("KUBERNETES_SERVICE_HOST")
 	viper.BindEnv("KUBERNETES_SERVICE_PORT")
@@ -31,6 +33,7 @@ func main() {
 	viper.BindEnv("TOKEN")
 	viper.BindEnv("INTERVAL")
 	viper.BindEnv("MODE")
+	viper.BindEnv("METHOD")
 
 	flag.Parse()
 
@@ -45,6 +48,7 @@ func main() {
 	token := viper.GetString("TOKEN")
 	interval := viper.GetFloat64("INTERVAL")
 	mode := viper.GetString("MODE")
+	method := viper.GetString("METHOD")
 
 	if mode == "background" {
 		// read the service account secret token file at once
@@ -65,6 +69,7 @@ func main() {
 			Project:   project,
 			Token:     token,
 			Interval:  interval,
+			Method:    method,
 			TotalTime: 0,
 		}
 		

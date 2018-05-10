@@ -19,6 +19,7 @@ type ChaosInput struct {
 	Url      string    `json:"url"`
 	Project string `json:"project"`
 	Token string `json:"token"`
+	Method string `json:"method"`
 	Interval float64 `json:"interval"`
 	TotalTime float64 `json:"totalTime"`
 }
