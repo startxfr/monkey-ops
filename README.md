@@ -1,11 +1,9 @@
-![Monkey-Ops logo](resources/images/monkey-ops-logo.jpg)
+![Monkey-Ops logo](resources/images/logo.svg)
 
-***
 
 ## What is Monkey-Ops
 
-Monkey-Ops is a simple service implemented in Go which is deployed into a OpenShift V3.X and generates some chaos within it. Monkey-Ops seeks some Openshift components like Pods or DeploymentConfigs and randomly terminates them.
-
+Monkey-Ops is a simple service implemented in Go which is deployed into a OpenShift v3.x and generates some chaos within it. Monkey-Ops seeks some Openshift components like Pods or DeploymentConfigs and randomly terminates them.
 
 ## Why Monkey-Ops
 
@@ -30,7 +28,7 @@ Monkey-Ops has tree differents chaos method: pod, dc or random.
 
 The service accept parameters as flags or environment variables. These are the input flags required:
 
-      --API_SERVER string     API Server URL
+      --API_SERVER string     API Server URL (use KUBERNETES_SERVICE_HOST if not provided)
       --INTERVAL float        Time interval between each actuation of operator monkey. It must be in seconds (by default 30)
       --MODE string           Execution mode: background or rest (by default "background")
       --METHOD string         Chaos method: pod, dc or random (default "random")
@@ -39,63 +37,84 @@ The service accept parameters as flags or environment variables. These are the i
       
 ### Usage with Docker
 
-**Downloading the image**
+#### Downloading the image
 
-	$ docker pull startx/monkey-ops:latest
+```bash
+docker pull startx/monkey-ops:latest
+```
 
-**Running the image**
+#### Running the image
 
-	$ docker run startx/monkey-ops /monkey-ops --TOKEN="Openshift Project service account token or Openshift user token" --PROJECT_NAME="Openshift Project name" --API_SERVER="Openshift API Server URL" --INTERVAL="Time interval between each actuation in seconds" --MODE=backgroun or rest"
+```bash
+docker run startx/monkey-ops \
+       /monkey-ops \
+       --TOKEN="my-bearer-token-from-openshift-authentication" \
+       --PROJECT_NAME="my-project" \
+       --API_SERVER="https://mycluster.openshift.example.com:8443" \
+       --INTERVAL=30 \
+       --MODE=background \
+       --METHOD=pod
+```
 
-### Usage with Openshift V3.x
+### Usage with Openshift v3.x
 
-Before all is necessary to create a service account (and a token as a secret) with editing permissions within the project that you want to use. The service account must be called with the same name than monkey-ops-template.yml parameter SA_NAME, by default monkey-ops.
+#### Prepare chaos environement
 
-In this page you can find how to do it: [Managing Service Accounts link](https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html#managing-service-accounts)
+Before all is necessary to connect to your openshift cluster and enter your target project
 
-Simply you have to create a service account called monkey-ops:
+```bash
+# Connecting to the openshift cluster
+# <user> is your openshift username
+# <password> is your openshift password
+# <url> is your openshift manager url (usually on port 8443)
+# ex: oc login -u dev -p dev https://openshift.demo.startx.fr:8443
+oc login -u <user> -p <password> <url>
+# Selecting your project to challenge
+oc project demo
+```
 
-	$ more monkey-ops.json
-	{
-	  "apiVersion": "v1",
-	  "kind": "ServiceAccount",
-	  "metadata": {
-	    "name": "monkey-ops"
-	  }
-	}
-	
-	$ oc create -f monkey-ops.json
-	serviceaccounts/monkey-ops
-	
-And later, grant it with edit role:
+Monkey-ops require to create a service account (and a token as a secret) with editing permissions within the project that you want to use. 
+The service account must be called with the same name than [mokey-ops template](https://raw.githubusercontent.com/startxfr/monkey-ops/master/openshift/monkey-ops-template.yml) parameter SA_NAME, by default monkey-ops.
+This service account must also have the edit role for this project.
 
-	$ oc policy add-role-to-user edit system:serviceaccount:"project name":monkey-ops
+```bash
+# Create the service account "monkey-ops"
+oc create -f https://raw.githubusercontent.com/startxfr/monkey-ops/master/openshift/monkey-ops-sa.yml
+# Grant the edit role for this project service account
+# oc policy add-role-to-user edit system:serviceaccount:<project>:<service-account>
+oc policy add-role-to-user edit system:serviceaccount:demo:monkey-ops
+```
 
-**Deploy *monkey-ops-template.yaml* into your Openshift Project:**
+This will create a service account named *monkey-ops* and grant it with edit role
+
+If you can't create this service account due to restricted permissions, you can find more information on how to do it in [Managing Service Accounts link](https://docs.openshift.com/enterprise/3.1/dev_guide/service_accounts.html#managing-service-accounts)
+
+#### Deploy the monkey agent
+
+Deploy the monkey agent template in your project using the [mokey-ops template](https://raw.githubusercontent.com/startxfr/monkey-ops/master/openshift/monkey-ops-template.yml)
 
 ```bash
 oc create \
-   -f https://raw.githubusercontent.com/startxfr/monkey-ops/master/openshift/monkey-ops-template.yaml \
-   -n "Openshift Project name"
+   -f https://raw.githubusercontent.com/startxfr/monkey-ops/master/openshift/monkey-ops-template.yml \
+   -n "demo"
 ```
 
-**Create new  application monkey-ops into your Openshift Project:**
-	
+Then use this template to start your monkey-ops agent in your project
+
 ```bash
 oc new-app \
    --name=monkey-ops \
    --template=monkey-ops \
    --param=APP_NAME=monkey-ops,INTERVAL=30,MODE=background,TZ=Europe/Paris \
    --labels=app_name=monkey-ops \
-   -n <project_name>
+   -n demo
+```
 	
-Once you have monkey-ops running in your project, you can see what the service is doing in your application logs. i.e.
+Once you have monkey-ops running in your project, you can see what the service is doing in your application logs
 
-![Monkey-Ops logs](resources/images/logs.JPG)
-
-**Time Zone**
-
-By default this image uses the time zone "Europe/Paris", if you want to change the default time zone, you should specify the environment variable TZ.
+```bash
+oc logs po/monkey-ops
+```
 
 ### API REST
 
@@ -144,3 +163,6 @@ Monkey-Ops Api Rest expose two endpoints:
 >     "totalTime": Total Time of monkey-ops execution in seconds
 >	}
 
+## Credit 
+
+The main project of this monkey-ops implementation came from [Produban monkey-ops project](https://github.com/Produban/monkey-ops)

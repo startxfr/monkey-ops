@@ -2,7 +2,7 @@ FROM scratch
 
 MAINTAINER Startx - Christophe LARUE <dev@startx.fr>
 
-ENV CHAOS_VERSION="0.1.0" \
+ENV CHAOS_VERSION="0.1.1" \
     SUMMARY="Chaos monkey container for kubernetes or openshift environements" \
     DESCRIPTION="Simple tool used for testing application or microservices resiliency by applying the chaos monkey technique."
 

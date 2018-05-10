@@ -3,6 +3,7 @@ env:
   - REPO=startx/monkey-ops
   - CGO_ENABLED=0
   - GOOS=linux
+  - RELEASE=0.1.1
   - secure: Tj8VaI9NTu3mY6vfB5/IiPgR/FtrvaNhZuZJ7Te42HLj9A3nhtWISde+V78Ls0o23RdFZZmkM0/CN/pTjm+i+dEgMJhktqfJzHj9R5M25s61NDfCd3o53V6OGez1pgOHvfgKiR38M5Smzk5+o7cc3V2/p9J4uQRthRLeACrYQx6c3CrKD3APuKqsKT8IxWj/Z2nfdu1T92YggVtfINYcxfOF8cxLZswoksjVUShg/pz3ATFGAB3c7jD33nJpuZisU/5BZHL/QT2XmdVTBpIsLv2+ZPIqZjR+qs/tE7S2Z1om9CiCe0+R9p55bkLIUpN4c0oiGhYgpl4Jl4VOjDIgHPDChNV3YKaKEkg7glAw9mAhl4pMObS6yqMzZt01zMj6P1Q/iQe/0Ge2nqzIvvWNlJmIkBGif6KrGiyvo9JPQovGgc9OrkCUP5rDsUQOgycp8xMZPn7UiWtS3m46G12ZcgyIKx0GwOQB+zu/Gu3byKfY2Cz/qJ4VfVpaYCjyP3BIwNkSyWhbh18fv/ergo2Lv74yZrYAfUiU8XXob9kuSc13tAqfazAFz/Rl/guXJyR+IMemVDmgjhFGNNxFLOphMvqSKn7mpftRJ+5TKiWuIdOY1O5h8Q8uMstDmoTsJCUBffASH6xeBgGPoNlSJR/kDED1p/g5Yslkt+IKeD/tQwA=
   - secure: UgyWtqeu3tUMjzcKO/qtLqB/53n7u0Mf9PguAVe0ckWMnlevp3mRXKYXhIyDbG6M2rvg+hZsokWmMFB68eZMAd/v6NdCGFm/K/PQIclpq/ndqk52xpyXPlYc988RW09elpKIvc3LH7KBu0/5pKwyuDljWBb9H9hF5Ag4loK7ChMmg5QGLt2lB4udnqWyMx8yPgQgXtzxHvDw3cRWCCLvAiJ3z+p13euZrvbFBCFD6FsdNpLjyu6S90QmpiwPqFV9ET5obK9PIeWejQ/19uatfuskneJR1KZbjEGLWtXAu54Oa5AsTt+ISa+wcalMN3kD5/vJfX57LYyBiZBkIPeRZr/aG8Ehh56HOUARb6+e2q8D7SjVige/sylYubX+dSE6mPVG4hoCflTH/8lqP8ZfTlE5gJyYznb/7Rz2qieCjf8vmn48JxYRdosr6ksQ1KYhaobh6ZMCyX1dpC+hRfod+CNkP57tJAX3RTOyMhnPCvsBDgHJGmYhNlVfMD1u/p78mA5QzYijFsplJNYnPz1DxcuVJQBIBwxljK+Jqu8de8XchvO4S6FiaD+xVZfZ8PmgQvSnAfXvA01BbG2jSVfZBxKViiuC2MeYSnZm/wCOvZsqCVXlYt75EJum5q/jf5wKo8KOoo7xNH4fQ8rfFqw5JcIratetLSq5U08D8/r683w=
 sudo: required
@@ -29,3 +30,5 @@ script:
 - docker run -d --name monkey-test $REPO:$TAG /monkey-ops --TOKEN=token
 after_success:
 - docker push $REPO:$TAG
+- docker build --squash -t $REPO:$RELEASE .
+- docker push $REPO:$RELEASE
