@@ -3,19 +3,15 @@ env:
   - REPO=startx/monkey-ops
   - CGO_ENABLED=0
   - GOOS=linux
-  - secure: Linv7Q1QtcUHHjfZs49UVFZW5lXE7+IwemzEEVU3f1QVH0XBs5fBh2e8wHp028JICpxX6fDugpG0KFq41c8s7DKLUce0fgnVHxfXB68fYh3d6t0co3kxIucyEU37iGT9iCmJjznHMZNITPnMLQex3bpUOitL+k62076tqWnD/RBtvmzBJrpU81d40RN1TSCk3tqGQV11Jh7wuZ/QjDttuTKl0aApc5xRKqRuxrb9ZuRWmB/JIPiwOWDBResV+aApnG8n1hhFSNt4Q+C09VZ0btsa6raqxC5Ws1og8z3bjnuKoZ1nbhLXjwDGYFW4mb4civdVlWcxt5xOOjZ3l/KbnW71mQhg69D2DV002J6VNR2OvnRnH0kOroWyYKdslB+osMb5FLP3O8VsE5K35t5IRvhSRlNxj1yyWyuHyGTcyWFJwn77KCDGysNV58yz2Pa7qp+hRe24PFgB9Q75K3RuODJ/Q4o30mwAVsA6BuzlG6lCXTsJ8VsAjfsgvQUQ2FwB1DlzM/sj9BelW04r3GWo6pwzI5QQ1/7p3MHXWfYf03o1WWvcxYG6zUkHdnFB0dnTrE17cw4dFV58oZSpMbUtvHDyDiuvSoQQwAq6Lxcr+KHfFSpR/rO3xjk5/I6aNMBJsAJ9yqJVFzde8RronAEG1N7h7pbi8NmCgcZHTKRBwZU= #DOCKER_USER
-  - secure: cDZzS7EQg71iWb7AyDTVvtbZOzgfE6MteMnJsn0yt/UXFoEOUBrvXWfDzHFYxA+yFrfljfv50dS+sRyUdKyw41ixmN0MpjC6LYuF9ndUY/urBoZ6Ux7HByiwKm3/z71OKbsvgWJ0WWuJ8WB+TKmoDRUevdCVBAbQc3syjrLzGQ3q3NUJBSNPQQlIVgZAHg8mG82ir7Xu8Rai/ZK6ZL2jxew8EL58xjs5dEXL4+Nt7IYQlDQLFHfa3rnUgEMmUlMtT7ymkZQyXnVYr3EkPgQJjntuaSayFsCQ4X7b5ZghnRurZRM4sFVNy9e7+kECB4Iqlsc78w36R9wjR1El0kCKatB1j5fQ7rqZBkoW3IEWAetlvufbvsRrU9hraxubtpFshCph4VUwMSz2+s4n4Ub3h0J162PXWQoXCzdSzcUUmezLz6BFiqdhU4kATNykRVDncfqCDg469bfQAnQwE5DRr0blXxCP98BkcbSWTO+eG2FQXs/TsAmuYAOp1BEcrNEBYpu/0iJaYoRradS6u17cPySDrvpdnW4MG7A6vqVcTzFaIl4vagDjw7gScbadhNKnRurZ/9pKDcv9GJMPY8NG36kBYmm9FXWuevO6Do4PdsZ+rGBSEY2YMotSsnktlOoBdEw6zD2St1frRnbjSeTz2BNIq+YICPdKfEElYCYVLzg= #DOCKER_EMAIL
-  - secure: K2Sq2WmGCL13K5pO+vpelB6zxd0U3JgTNpcbCirDN7DswG3ZnBOhxVGM19XO5ZrKd/yRgjhOavBUNCV1Sopa/5aMQvgEAGy95f/fh2LsPp3BfmrMUhHw3VezPxvGmcU3o+IGtdwI1ICVjkFDftxfrZb/uoz9WsJTnfspkJaXsMbzQitU0GOehoiFIcIz1+p9Am29yJchj+osNIu4HQ1xeSK7H4+gAs44mbBpoBNO6DQ5usWP7AR0JQneAeBognj7Ss4M7yhRbm/4FRJsWSc3hOkN2SGX02ieIQfU5tNnpGcjOu9oUeGlCUzYIXkA/XGttof0BpjpwU9tK0OxQ2UxKQY/TeKsHUPUxHan2m+VFmaMinLO9qtCwyk9YneLNjZajxnHC0x8Nz5hYlp1fLvUREqhcRa0w3ti13agFNRLOLDDstdOxcQ9uIsRoTq7h3zmu3TNNKi4g8HzQphDFDH12vzoUsrXgDJ/mxoa+sp8MYJCcjJCHB8KDtn9sd7iiX5vxkrUE+nWCveGsYdTBDwEsxTYDc6UDpFRE4aLWOINNEP8hSaaak3Vuz/Z6Dd4/dJLx7zj3u0YgRwcCeXH8u+vJbfQT5ebieaDGcUmlga4Ka9mKKJIgyq4QEPHXjjCO7ahyOLz4YvmhR25fTX9XrdsiDabO5RZFFjoO9DyFsq/oRw= #DOCKER_PASS
-
+  - secure: JsbXeZklHuVuzHu+Tczx0O2nXm6sUsPMPzsOrj1YLRpX4onryVgbLico7RiTlwRZnOUAtoDxDRhn46mO2Z9CfNszdV6gaoB1taoASjXKQI0GoHgpDuaN9sxNUKhVzOUmOI5R+viQ5Ue5ioyfbTdncN6mh5v8YyGG0MvTfENjgQq0e1c1UQ7SungBcvJHrbT1TprX1Xbig5cj5KHq7gOgltM53d4MwpQOiZ1RQagOfRV0RX4rqxVYmpIhaHe4rSKvsKyJq1WAipxBy6AAXlU+rcdfkfcnfz+xMOqBZpntJdZGSj4QOEkZNUKTvJdwtFi5r9h8wW1MTAghpqNhvGLGc6DAW7rgrKj1yw0f8Vdy787CEggr9n5t/TJ3Yqusf4cD9fms1g2jutjgYyWuT+gx5VY2oP9jOtEPaMKARyaqyDwKCFQQDqAppe0lr5ve+nbD5mI82pGv712NNetx/7lL4HbymMMQLcPbjX1aQnzpcE7Ogwg8l+S2qml4WvBqWfunpunx1L63t/m0rA+nIC2GVP53/BFST8eXLGFCli6v7zMj6q5nL28Uk2G5KEwY9tNXR8wJUBFhkvok6w90AMsWPYxPrWJqsdJhulK5VN8n96uuV0PTfLucm8i7IK81H/OOyEV7/Q7oxIeStYHhswYwtaTqZ2u9ttLbb/YIh7rzw3o=
+  - secure: ke0XMZsmf+GBT2TpP6SHmxk8ZrST5mfyp9SRpBgjvF6fgsFKqi/wW+5aS+HNvgo63nDFb1OmHzhNfnK5AnD2T1nfb1iyrXT3cdfDJBsvg7elValG8vFLuLt3gITMwO0yj+tVqEVyvsfOLgSRPuu2Tm6mHCPpdJroQy3eU171OhLEUQv4dXNSg892tvEfnrOpdsVjHas9AeSrCgdT+FES9dk6Rve4AxBQS8ptxDzM6iEQUMDxIXTfIDw/3knPC4yJPKoKYlPrw187f8mGAraWdgzmSGWBvY+mQIh0V5L6uVbD0ykBvZf/ccojQUTu6rzPdV2zrtPzxRamSRiXstcxuazD4VLMJv6MfnJYUxQMM2KoqHKDcp2xyoX5J1bR26bdv/Mm2EEvCFzQmW6opZumSwj2LXJi3teGUzBQuDEvUYqpzoxNSzapXwCCIw9ad9JjbP6aZ5wITsnfYj7R9VLvKOUEmzLPyIdIycE0JgDxy9s0xUVjR4sXjDWWtPv+ULUEJV4awbZPdmtlznVz9yuH6SO4O837/hFKIwFxs6yDVsE3jFnhQWLG3tYP9KVzf2BSeO/8kgUAKI0CJoGf6dUUZUvTNt6S5Lr5Updl8HH4k1J9Q09ml91b6XeqMKc6m0Ztf06y3D2ygT3WSfHIqO+A7mEau6FetLOv4m+Wt2f6In4=
 sudo: required
-
 services:
 - docker
-
 language: go
-
 before_install:
-- 'echo "{ \"experimental\": true, \"storage-driver\": \"overlay2\", \"max-concurrent-downloads\":50,\"max-concurrent-uploads\": 50 }" | sudo tee /etc/docker/daemon.json'
+- 'echo "{ \"experimental\": true, \"storage-driver\": \"overlay2\", \"max-concurrent-downloads\":50,\"max-concurrent-uploads\":
+  50 }" | sudo tee /etc/docker/daemon.json'
 - sudo service docker restart
 - docker images
 - mkdir ~/.gocache
@@ -25,12 +21,11 @@ before_install:
 - go get -v -u github.com/gorilla/mux
 - go build -a -installsuffix cgo -o ./image/monkey-ops ./go/*.go
 - docker login -u $DOCKER_USER -p $DOCKER_PASS
-- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; elif [ "$TRAVIS_BRANCH"  == "test" ]; then echo "testing"; else echo $TRAVIS_BRANCH ; fi`
-
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; elif [ "$TRAVIS_BRANCH"  ==
+  "test" ]; then echo "testing"; else echo $TRAVIS_BRANCH ; fi`
 script:
 - cd ./image
 - docker build --squash -t $REPO:$TAG .
 - docker run -d --name monkey-test $REPO:$TAG --TOKEN=token
-
 after_success:
 - docker push $REPO:$TAG
