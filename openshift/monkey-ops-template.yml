@@ -14,12 +14,12 @@ message: Your chaos monkey is deploying in your project. You can use openshift c
 labels:
   template: monkey-ops-template
 objects:
-- apiVersion: v1
-  kind: DeploymentConfig
+- kind: DeploymentConfig
+  apiVersion: v1
   metadata:
+    name: ${APP_NAME}
     labels:
       app_name: ${APP_NAME}
-    name: ${APP_NAME}
   spec:
     replicas: 1
     selector:
@@ -85,7 +85,6 @@ objects:
                 fieldPath: metadata.annotations
               name: annotations
           name: podinfo
-  status: {}
 parameters:
 - displayName: Application Name
   description: Nae of this application
@@ -100,7 +99,7 @@ parameters:
 - displayName: Time interval between each action
   description: Time interval between each actuation of operator monkey. It must be in seconds
   name: INTERVAL
-  value: 30
+  value: "30"
   required: true
 - displayName: Execution Mode
   description: Execution Mode, It must be "background", i.e., it runs nonstop, or "rest", i.e., it executes via API Rest.

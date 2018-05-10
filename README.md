@@ -102,12 +102,13 @@ oc create \
 Then use this template to start your monkey-ops agent in your project
 
 ```bash
-oc new-app \
-   --name=monkey-ops \
-   --template=monkey-ops \
-   --param=APP_NAME=monkey-ops,INTERVAL=30,MODE=background,TZ=Europe/Paris \
-   --labels=app_name=monkey-ops \
-   -n demo
+oc process monkey-ops-template \
+   -p APP_NAME=monkey-ops \
+   -p INTERVAL=30 \
+   -p MODE=background \
+   -p METHOD=pod \
+   -p TZ=Europe/Paris | \
+oc create -f -
 ```
 	
 Once you have monkey-ops running in your project, you can see what the service is doing in your application logs

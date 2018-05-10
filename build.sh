@@ -1,6 +1,6 @@
 echo "Building monkey-ops docker image"
 
-TAG="0.1.1"
+TAG="0.1.2"
 PROXY=""
 
 if [ "$#" -gt 0 ]; then
