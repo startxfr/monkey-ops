@@ -49,7 +49,9 @@ objects:
           - name: INTERVAL
             value: ${INTERVAL}
           - name: MODE
-            value: ${MODE}                                             
+            value: ${MODE}     
+          - name: METHOD
+            value: ${METHOD}                                             
           - name: TZ
             value: ${TZ}
           image: startx/monkey-ops:latest
