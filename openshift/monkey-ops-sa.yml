@@ -1,4 +1,57 @@
 apiVersion: v1
-kind: ServiceAccount
+kind: Template
 metadata:
-  name: monkey-ops
+  name: monkey-ops-admin-template
+  annotations:
+    openshift.io/display-name: Chaos Monkey (admin setup)
+    description: Template for deploying a chaos monkey Agent in your project
+    iconClass: icon-openjdk
+    tags: startx,test,chaos,monkey
+    openshift.io/provider-display-name: STARTX
+    openshift.io/documentation-url: https://github.com/startxfr/monkey-ops/blob/master/README.md
+    openshift.io/support-url: https://github.com/startxfr/monkey-ops/issues/new
+message: Your chaos monkey is ready to be deployed in your project. You can deploy it using the monkey-ops template.
+labels:
+  template: monkey-ops-admin-template
+objects:
+- kind: ServiceAccount
+  apiVersion: v1
+  metadata:
+    name: "${SA_NAME}"
+    labels:
+      app: ${APP_NAME}
+- kind: RoleBinding
+  apiVersion: authorization.openshift.io/v1
+  metadata:
+    name: "${SA_NAME}-rolebinding"
+    labels:
+      app: ${APP_NAME}
+  roleRef:
+    name: edit
+  subjects:
+  - kind: ServiceAccount
+    name: "${SA_NAME}"
+  userNames:
+  - "system:serviceaccount:${PROJECT}:${SA_NAME}"
+parameters:
+- displayName: Application Name
+  description: Name of this monkey instance
+  name: APP_NAME
+  required: true
+  value: monkey-ops
+- displayName: Project namespace
+  description: Name of the project namespace
+  name: PROJECT
+  required: true
+- displayName: Service Account name
+  description: Service Account name to use for k8s API access
+  name: SA_NAME
+  required: true
+  value: monkey-ops
+
+
+
+
+
+
+
